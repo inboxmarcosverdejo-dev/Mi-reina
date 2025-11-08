@@ -1,0 +1,1207 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<!-- Mirrored from dedicapag.com/u/690f7fd3bd531 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Nov 2025 18:24:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Il nostro amore è un amore perfetto, purché tu ci</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&amp;family=Caveat:wght@500;700&amp;family=Pacifico&amp;display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌌</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&amp;family=Caveat:wght@500;700&amp;family=Pacifico&amp;family=Dancing+Script:wght@600;700&amp;family=Permanent+Marker&amp;family=Kalam:wght@700&amp;family=Shadows+Into+Light&amp;family=Amatic+SC:wght@700&amp;display=swap" rel="stylesheet">
+    <link href="../es/PagFlorGalaxy/assets/style16.css" rel="stylesheet">
+    
+    <style>
+        #main-title {
+        background: linear-gradient(90deg, #00d4ff, #7b2ff7, #f107a3, #00d4ff) !important;
+        background-size: 200% 200% !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+        background-clip: text !important;
+        animation: gradientFlow 5s ease infinite !important;
+        filter: drop-shadow(0 0 20px rgba(0, 191, 255, 0.6)) !important;
+    }
+    #start-text {
+        background: linear-gradient(90deg, #00d4ff, #7b2ff7, #f107a3, #ff6b35, #00d4ff) !important;
+        background-size: 300% 300% !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+        background-clip: text !important;
+        animation: gradientFlow 4s ease infinite !important;
+        filter: drop-shadow(0 0 30px rgba(0, 191, 255, 0.7)) !important;
+    }
+        </style>
+</head>
+<body>
+    <div id="start-screen">
+        <img id="start-button-image" src="../es/PagFlorGalaxy/assets/1.gif" alt="Iniciar" onerror="this.style.display='none'">
+        <div id="start-text">Déjame que te enseñe ❤️</div>
+        <div id="subtitle-text">Lo mucho te quiero</div>
+    </div>
+    
+    <div id="fullscreen-controls" style="position: absolute; top: 20px; right: 20px; z-index: 10000;">
+        <button id="fullscreen-btn" style="background: rgba(0, 0, 0, 0.7); border: 1px solid #cc00ffff; color: #9900ffff; padding: 10px; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; font-size: 18px; backdrop-filter: blur(10px); transition: all 0.3s ease;">
+            ⛶
+        </button>
+    </div>
+    
+    <div id="title-container">
+        <h1 id="main-title">Il nostro amore è un amore perfetto, purché tu ci</h1>
+    </div>
+
+    <div id="loading-container">
+        <div id="loading-text">Creando tu universo...</div>
+        <div id="loading-progress">
+            <div id="loading-bar"></div>
+        </div>
+    </div>
+
+    <div id="controls-info">
+        🖱️Arrastra para rotar | 🔍Scroll para zoom | 📱Toca y desliza
+    </div>
+
+    <div id="image-modal">
+        <div id="modal-content">
+            <button id="close-modal">&times;</button>
+            <img id="modal-image" src="#" alt="Imagen especial">
+            <div id="modal-message"></div>
+        </div>
+    </div>
+
+        <audio id="background-music" loop>
+        <source src="https://dedicapag.com/es/PagFlorGalaxy/musicas/The Weeknd-Die For You.mp3" type="audio/mpeg">
+    </audio>
+    
+    <canvas id="galaxy-canvas"></canvas>
+
+    <script type="importmap">
+    { "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        } }
+    </script>
+    
+    <script>
+    // Partículas cósmicas en pantalla de inicio
+    function createCosmicParticles() {
+        const parent = document.getElementById('start-screen');
+        parent.querySelectorAll('.cosmic-particle').forEach(n => n.remove());
+
+        const count = window.innerWidth < 768 ? 4 : 6;
+        for (let i = 0; i < count; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'cosmic-particle';
+            particle.style.width = particle.style.height = (2 + Math.random() * 3) + 'px';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.opacity = 0.5 + Math.random() * 0.3;
+            particle.style.willChange = 'transform, opacity';
+            parent.appendChild(particle);
+
+            requestAnimationFrame(() => {
+                particle.style.transition = `transform ${2 + Math.random() * 2}s ease-in-out, opacity ${2 + Math.random() * 2}s`;
+                particle.style.transform = `translate3d(${(Math.random() - 0.5) * 20}px, ${(Math.random() - 0.5) * 20}px, 0)`;
+            });
+        }
+    }
+    createCosmicParticles();
+
+    // Estrellas fugaces
+    if (window.innerWidth >= 768) {
+        setInterval(() => {
+            if (document.getElementById('start-screen').style.display !== 'none') {
+                const star = document.createElement('div');
+                star.className = 'shooting-star';
+                star.style.left = (30 + Math.random() * 60) + '%';
+                star.style.top = Math.random() * 30 + '%';
+                star.style.willChange = 'transform, opacity';
+                document.getElementById('start-screen').appendChild(star);
+                setTimeout(() => star.remove(), 1500);
+            }
+        }, 3000);
+    }
+    </script>
+
+    <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+    import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+    import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+
+    const isMobile = window.innerWidth < 768;
+    const imageData = [{"url":"https:\/\/f004.backblazeb2.com\/file\/Dedicapag-FlorGalaxy-2025\/PagFlorGalaxy%2Fuploads%2F690f7fceab4b6_descarga__25_.jpeg","b2_id":"4_z3f24d9e53d3acf5d9d980513_f111f115ec37faaa5_d20251108_m173719_c004_v0402032_t0005_u01762623439351","message":"Eres mi zing"},{"url":"https:\/\/f004.backblazeb2.com\/file\/Dedicapag-FlorGalaxy-2025\/PagFlorGalaxy%2Fuploads%2F690f7fcf6eb5f_descarga__26_.jpeg","b2_id":"4_z3f24d9e53d3acf5d9d980513_f103f157c51761cf6_d20251108_m173720_c004_v0402030_t0058_u01762623440094","message":"No importa lo que pase. Siempre juntos."},{"url":"https:\/\/f004.backblazeb2.com\/file\/Dedicapag-FlorGalaxy-2025\/PagFlorGalaxy%2Fuploads%2F690f7fd023bad_Imagen_de_WhatsApp_2025-11-08_a_las_18.32.45_74e800bf.jpg","b2_id":"4_z3f24d9e53d3acf5d9d980513_f102b3601817d4893_d20251108_m173720_c004_v0402032_t0050_u01762623440797","message":"Because always will be you."},{"url":"https:\/\/f004.backblazeb2.com\/file\/Dedicapag-FlorGalaxy-2025\/PagFlorGalaxy%2Fuploads%2F690f7fd0d9eb6_Eres_todo_lo_que_necesito.png","b2_id":"4_z3f24d9e53d3acf5d9d980513_f1192fe1f4fa68adf_d20251108_m173721_c004_v0402017_t0050_u01762623441496","message":"Solo t\u00fa."},{"url":"https:\/\/f004.backblazeb2.com\/file\/Dedicapag-FlorGalaxy-2025\/PagFlorGalaxy%2Fuploads%2F690f7fd1986dc_Imagen_de_WhatsApp_2025-11-08_a_las_18.33.47_5a9ec108.jpg","b2_id":"4_z3f24d9e53d3acf5d9d980513_f105c0f5c4ef68399_d20251108_m173722_c004_v0402021_t0019_u01762623442263","message":"El uno para el otro."},{"url":"https:\/\/f004.backblazeb2.com\/file\/Dedicapag-FlorGalaxy-2025\/PagFlorGalaxy%2Fuploads%2F690f7fd2859eb_39a117e6-57b0-4923-9265-f82061f11d85.jpg","b2_id":"4_z3f24d9e53d3acf5d9d980513_f112b0166ca4b77c7_d20251108_m173723_c004_v0402023_t0014_u01762623443187","message":"Y solo tengo ojos para ti. Porque t\u00fa eres mi vida."}];
+
+    const CONFIG = {
+        galaxy: { rotationSpeed: 0.06, centerExclusionRadius: 45 },
+        elementExclusionRadius: 40,
+        blackHole: { 
+            radius: 18, segments: isMobile ? 90 : 128, 
+            color1: '#000000', color2: '#1a0033',
+            pulseSpeed: 0.4, pulseIntensity: 0.2
+        },
+        accretionRing: {
+            innerRadius: 0, outerRadius: 20, segments: isMobile ? 128 : 256,
+            centerColor: '#9932CC', midColor: '#8A2BE2', edgeColor: '#4B0082',
+            emissiveIntensity: isMobile ? 2 : 2.5, rotationSpeed: 0
+        },
+        particles: {
+            coreStars: { 
+                count: isMobile ? 15000 : 30000, radius: 150, maxHeight: 55, 
+                size: 0.35, layers: isMobile ? 2 : 4
+            },
+            backgroundStars: { 
+                count: isMobile ? 6000 : 10000, radius: 700, size: 0.3,
+                twinkleSpeed: 0.002
+            },
+            texts: {
+                count: isMobile ? 50 : 45, width: 55, height: 30,
+                minRadius: null, maxRadius: 150,
+                content: ["\u00bfY s\u00ed volvi\u00e9semos?","En mis brazos","Mi sirena","Brillas m\u00e1s queeluniverso","\u00bfY si te llevo?","Te prometo","Tuyo"],
+                colors: [{"fill":"#00d4ff","shadow":"#00d4ff"},{"fill":"#7b2ff7","shadow":"#7b2ff7"},{"fill":"#f107a3","shadow":"#f107a3"},{"fill":"#1E90FF","shadow":"#1E90FF"},{"fill":"#87CEEB","shadow":"#87CEEB"},{"fill":"#FF6B9D","shadow":"#FF6B9D"}],
+                floatAmplitude: 0.7, floatSpeed: 0.6
+            },
+            images: {
+                count: isMobile ? 40 : 40, size: 16,
+                minRadius: null, maxRadius: 150,
+                urls: imageData.map(img => img.url),
+                messages: imageData.map(img => img.message),
+                rotationSpeed: 0.15
+            }
+        },
+        lighting: {
+            ambientLight: { color: '#ffffff', intensity: 0.3 },
+            pointLight: { color: '#9932CC', intensity: 4, distance: 450 },
+            rimLight: { color: '#8A2BE2', intensity: 2, distance: 350 }
+        },
+        bloomEffect: { threshold: 0.8, strength: isMobile ? 0.6 : 0.9, radius: 0.7 },
+        cameraControls: { minDistance: 40, maxDistance: 350, autoRotate: true, autoRotateSpeed: 0.4 }
+    };
+
+    let scene, camera, renderer, controls, galaxyGroup, clock, composer;
+    let loveTexts = [], loveImages = [], starParticles = [];
+    let occupiedPositions = [];
+    let accretionRing, bgStars, centerFlower;
+    let raycaster, mouse;
+
+    function init() {
+        scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x000000, 0.0007);
+        clock = new THREE.Clock();
+        
+        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1500);
+        
+        renderer = new THREE.WebGLRenderer({ 
+            canvas: document.getElementById('galaxy-canvas'), 
+            antialias: true,
+            alpha: true,
+            powerPreference: "high-performance"
+        });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.0;
+
+        controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.06;
+        controls.minDistance = CONFIG.cameraControls.minDistance;
+        controls.maxDistance = CONFIG.cameraControls.maxDistance;
+        controls.autoRotate = CONFIG.cameraControls.autoRotate;
+        controls.autoRotateSpeed = CONFIG.cameraControls.autoRotateSpeed;
+        controls.enablePan = false;
+        if (isMobile) {
+            controls.enableZoom = true;
+            controls.zoomSpeed = 0.5;
+        }
+
+        const renderScene = new RenderPass(scene, camera);
+        const bloomPass = new UnrealBloomPass(
+            new THREE.Vector2(window.innerWidth, window.innerHeight), 
+            CONFIG.bloomEffect.strength,
+            CONFIG.bloomEffect.radius,
+            CONFIG.bloomEffect.threshold
+        );
+        composer = new EffectComposer(renderer);
+        composer.addPass(renderScene);
+        composer.addPass(bloomPass);
+
+        raycaster = new THREE.Raycaster();
+        mouse = new THREE.Vector2();
+
+        setupLighting();
+        
+        galaxyGroup = new THREE.Group();
+        scene.add(galaxyGroup);
+
+        createCenterFlower();
+        createCoreStars();
+        createBackgroundStars();
+        
+        loadAssetsAndCreateElements();
+
+        renderer.domElement.addEventListener('click', onClick, false);
+        if (isMobile) {
+            renderer.domElement.addEventListener('touchstart', onTouchStart, { passive: false });
+        }
+
+        window.addEventListener('resize', onWindowResize);
+        onWindowResize();
+        animate();
+    }
+
+    function onTouchStart(event) {
+        event.preventDefault();
+        const touch = event.touches[0];
+        mouse.x = (touch.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(touch.clientY / window.innerHeight) * 2 + 1;
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(loveImages);
+        if (intersects.length > 0) {
+            const clickedMesh = intersects[0].object;
+            if (clickedMesh.userData.url && clickedMesh.userData.message) {
+                showModal(clickedMesh.userData.url, clickedMesh.userData.message);
+            }
+        }
+    }
+
+    function onClick(event) {
+        if (isMobile) return;
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(loveImages);
+
+        if (intersects.length > 0) {
+            const clickedMesh = intersects[0].object;
+            if (clickedMesh.userData.url && clickedMesh.userData.message) {
+                showModal(clickedMesh.userData.url, clickedMesh.userData.message);
+            }
+        }
+    }
+
+    function showModal(imageUrl, message) {
+        const modal = document.getElementById('image-modal');
+        const modalImage = document.getElementById('modal-image');
+        const modalMessage = document.getElementById('modal-message');
+
+        modalImage.src = imageUrl;
+        modalMessage.textContent = message;
+
+        modal.style.display = 'flex';
+        setTimeout(() => {
+            modal.style.opacity = '1';
+        }, 10);
+    }
+
+    document.getElementById('close-modal').addEventListener('click', () => {
+        const modal = document.getElementById('image-modal');
+        modal.style.opacity = '0';
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 300);
+    });
+
+    document.getElementById('image-modal').addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) {
+            const modal = e.currentTarget;
+            modal.style.opacity = '0';
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+    });
+
+    function setupLighting() {
+        const { ambientLight, pointLight, rimLight } = CONFIG.lighting;
+        
+        scene.add(new THREE.AmbientLight(ambientLight.color, ambientLight.intensity));
+        
+        const mainLight = new THREE.PointLight(pointLight.color, pointLight.intensity, pointLight.distance);
+        mainLight.position.set(0, 0, 0);
+        scene.add(mainLight);
+
+        const rim1 = new THREE.PointLight(rimLight.color, rimLight.intensity, rimLight.distance);
+        rim1.position.set(120, 60, 120);
+        scene.add(rim1);
+
+        const rim2 = new THREE.PointLight(rimLight.color, rimLight.intensity * 0.8, rimLight.distance);
+        rim2.position.set(-120, -60, -120);
+        scene.add(rim2);
+
+        const accentLight = new THREE.PointLight('#FF1493', rimLight.intensity * 0.5, rimLight.distance * 0.7);
+        accentLight.position.set(0, 100, 0);
+        scene.add(accentLight);
+    }
+
+    function createCenterFlower() {
+        const ringConfig = CONFIG.accretionRing;
+        
+        // Crear grupo para flor y anillo (se moverán juntos)
+        const centerGroup = new THREE.Group();
+        centerGroup.position.set(0, 35, 0);
+        scene.add(centerGroup);
+        
+        // Guardar referencia al grupo
+        window.centerGroup = centerGroup;
+        
+        // Crear flor central con PNG
+        const textureLoader = new THREE.TextureLoader();
+      textureLoader.load('flor-nueva.png',
+    (texture) => {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                canvas.width = texture.image.width;
+                canvas.height = texture.image.height;
+                ctx.drawImage(texture.image, 0, 0);
+
+                ctx.filter = 'saturate(1.2) contrast(1)';
+                ctx.drawImage(canvas, 0, 0);
+
+                const enhancedTexture = new THREE.CanvasTexture(canvas);
+                enhancedTexture.colorSpace = THREE.SRGBColorSpace;
+                enhancedTexture.needsUpdate = true;
+
+                const aspect = enhancedTexture.image.height / enhancedTexture.image.width;
+                const flowerWidth = 50;
+                const flowerHeight = flowerWidth * aspect;
+
+                const flowerMaterial = new THREE.MeshBasicMaterial({
+                    map: enhancedTexture,
+                    transparent: true,
+                    alphaTest: 0.05,
+                    side: THREE.DoubleSide,
+                    color: new THREE.Color(1.3, 0.8, 1.3),
+                    fog: false
+                });
+
+                centerFlower = new THREE.Mesh(
+                    new THREE.PlaneGeometry(flowerWidth, flowerHeight),
+                    flowerMaterial
+                );
+
+                centerFlower.position.set(0, -10, 0);
+                centerGroup.add(centerFlower);
+                console.log('Flor central cargada con boost de saturación');
+            },
+            undefined,
+            (error) => {
+                console.error('Error cargando PNG de flores:', error);
+            }
+        );
+        
+        // Anillo de acreción
+        const ringGeometry = new THREE.RingGeometry(
+            ringConfig.innerRadius, 
+            ringConfig.outerRadius, 
+            ringConfig.segments
+        );
+        
+        const ringMaterial = new THREE.ShaderMaterial({
+            uniforms: { 
+                uTime: { value: 0.0 },
+                innerRadius: { value: ringConfig.innerRadius }, 
+                outerRadius: { value: ringConfig.outerRadius }, 
+                centerColor: { value: new THREE.Color(ringConfig.centerColor) }, 
+                midColor: { value: new THREE.Color(ringConfig.midColor) }, 
+                edgeColor: { value: new THREE.Color(ringConfig.edgeColor) }, 
+                emissiveIntensity: { value: ringConfig.emissiveIntensity }
+            },
+            vertexShader: `
+                varying vec3 vPosition;
+                varying vec2 vUv;
+                void main() {
+                    vPosition = position;
+                    vUv = uv;
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                }
+            `,
+            fragmentShader: `
+                uniform float uTime;
+                uniform float innerRadius;
+                uniform float outerRadius;
+                uniform vec3 centerColor;
+                uniform vec3 midColor;
+                uniform vec3 edgeColor;
+                uniform float emissiveIntensity;
+                varying vec3 vPosition;
+                varying vec2 vUv;
+                
+                void main() {
+                    float distance = length(vPosition.xy);
+                    float normalizedDistance = clamp((distance - innerRadius) / (outerRadius - innerRadius), 0.0, 1.0);
+                    
+                    vec3 finalColor;
+                    if (normalizedDistance < 0.5) {
+                        finalColor = mix(centerColor, midColor, normalizedDistance * 2.0);
+                    } else {
+                        finalColor = mix(midColor, edgeColor, (normalizedDistance - 0.5) * 2.0);
+                    }
+                    
+                    float wave = sin(normalizedDistance * 25.0 - uTime * 2.5) * 0.15 + 1.0;
+                    float spiral = sin(atan(vPosition.y, vPosition.x) * 8.0 + normalizedDistance * 15.0 - uTime * 3.0) * 0.1 + 1.0;
+                    float glowFactor = (1.0 - smoothstep(0.0, 1.0, normalizedDistance)) * wave * spiral;
+                    vec3 emissiveColor = finalColor * emissiveIntensity * glowFactor;
+                    
+                    gl_FragColor = vec4(finalColor + emissiveColor, 1.0);
+                }
+            `,
+            side: THREE.DoubleSide,
+            transparent: true
+        });
+        
+        accretionRing = new THREE.Mesh(ringGeometry, ringMaterial);
+        accretionRing.rotation.x = Math.PI / 2;
+        centerGroup.add(accretionRing);
+    }
+
+    function createCoreStars() {
+        const coreConfig = CONFIG.particles.coreStars;
+        
+        for (let layer = 0; layer < coreConfig.layers; layer++) {
+            const geometry = new THREE.BufferGeometry();
+            const starCount = Math.floor(coreConfig.count / coreConfig.layers);
+            const positions = new Float32Array(starCount * 3);
+            const colors = new Float32Array(starCount * 3);
+            const sizes = new Float32Array(starCount);
+            const color = new THREE.Color();
+            
+            for (let i = 0; i < starCount; i++) {
+                const distance = CONFIG.accretionRing.outerRadius + 
+                    Math.random() * (coreConfig.radius - CONFIG.accretionRing.outerRadius);
+                const angle = Math.random() * Math.PI * 2;
+                const heightFactor = Math.pow(1 - (distance / coreConfig.radius), 2);
+                const y = (Math.random() - 0.5) * coreConfig.maxHeight * heightFactor * (1 + layer * 0.4);
+                
+                positions.set([
+                    Math.cos(angle) * distance, 
+                    y, 
+                    Math.sin(angle) * distance
+                ], i * 3);
+                
+                const hue = 0.5 + Math.random() * 0.15;
+                const saturation = 0.75 + Math.random() * 0.25;
+                const lightness = 0.5 + Math.random() * 0.45;
+                color.setHSL(hue, saturation, lightness);
+                colors.set([color.r, color.g, color.b], i * 3);
+                
+                sizes[i] = coreConfig.size * (0.6 + Math.random() * 0.8);
+            }
+            
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+            geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+            
+            const material = new THREE.ShaderMaterial({
+                uniforms: {
+                    uTime: { value: 0 },
+                    uPixelRatio: { value: Math.min(window.devicePixelRatio, 2) }
+                },
+                vertexShader: `
+                    uniform float uTime;
+                    uniform float uPixelRatio;
+                    attribute float size;
+                    attribute vec3 color;
+                    varying vec3 vColor;
+                    varying float vAlpha;
+                    
+                    void main() {
+                        vColor = color;
+                        vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+                        
+                        float twinkle = sin(uTime * 2.5 + position.x * 120.0) * 0.35 + 0.65;
+                        vAlpha = twinkle;
+                        
+                        gl_PointSize = size * uPixelRatio * (300.0 / -mvPosition.z) * twinkle;
+                        gl_Position = projectionMatrix * mvPosition;
+                    }
+                `,
+                fragmentShader: `
+                    varying vec3 vColor;
+                    varying float vAlpha;
+                    
+                    void main() {
+                        float distanceToCenter = length(gl_PointCoord - vec2(0.5));
+                        float alpha = 1.0 - smoothstep(0.25, 0.5, distanceToCenter);
+                        gl_FragColor = vec4(vColor, alpha * vAlpha);
+                    }
+                `,
+                blending: THREE.AdditiveBlending,
+                transparent: true,
+                depthWrite: false
+            });
+            
+            const points = new THREE.Points(geometry, material);
+            galaxyGroup.add(points);
+            starParticles.push({ points, material });
+        }
+    }
+
+    function createBackgroundStars() {
+        const bgConfig = CONFIG.particles.backgroundStars;
+        const geometry = new THREE.BufferGeometry();
+        const positions = new Float32Array(bgConfig.count * 3);
+        const colors = new Float32Array(bgConfig.count * 3);
+        const sizes = new Float32Array(bgConfig.count);
+        const color = new THREE.Color();
+        
+        for (let i = 0; i < bgConfig.count; i++) {
+            const r = bgConfig.radius;
+            positions.set([
+                (Math.random() - 0.5) * 2 * r, 
+                (Math.random() - 0.5) * 2 * r, 
+                (Math.random() - 0.5) * 2 * r
+            ], i * 3);
+            
+            const hue = Math.random() * 0.2 + 0.48;
+            color.setHSL(hue, 0.85, 0.75);
+            colors.set([color.r, color.g, color.b], i * 3);
+            
+            sizes[i] = bgConfig.size * (0.4 + Math.random() * 1.8);
+        }
+        
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+        geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+        
+        const material = new THREE.ShaderMaterial({
+            uniforms: {
+                uTime: { value: 0 },
+                uPixelRatio: { value: Math.min(window.devicePixelRatio, 2) }
+            },
+            vertexShader: `
+                uniform float uTime;
+                uniform float uPixelRatio;
+                attribute float size;
+                attribute vec3 color;
+                varying vec3 vColor;
+                varying float vTwinkle;
+                
+                void main() {
+                    vColor = color;
+                    vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+                    
+                    float twinkle = sin(uTime * 3.5 + position.x * 60.0 + position.y * 40.0) * 0.45 + 0.55;
+                    vTwinkle = twinkle;
+                    
+                    gl_PointSize = size * uPixelRatio * (550.0 / -mvPosition.z) * twinkle;
+                    gl_Position = projectionMatrix * mvPosition;
+                }
+            `,
+            fragmentShader: `
+                varying vec3 vColor;
+                varying float vTwinkle;
+                
+                void main() {
+                    float distanceToCenter = length(gl_PointCoord - vec2(0.5));
+                    float alpha = 1.0 - smoothstep(0.15, 0.5, distanceToCenter);
+                    gl_FragColor = vec4(vColor, alpha * vTwinkle * 0.8);
+                }
+            `,
+            blending: THREE.AdditiveBlending,
+            transparent: true,
+            depthWrite: false
+        });
+        
+        bgStars = new THREE.Points(geometry, material);
+        scene.add(bgStars);
+    }
+
+    function createFloatingPetals() {
+        const petalCount = isMobile ? 40 : 120;
+        const petals = [];
+        
+        for (let i = 0; i < petalCount; i++) {
+            const petalGeometry = new THREE.BufferGeometry();
+            const vertices = new Float32Array([
+                0, 0, 0,
+                0.8, 1.5, 0,
+                0, 3, 0,
+                -0.8, 1.5, 0
+            ]);
+            petalGeometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
+            petalGeometry.setIndex([0, 1, 2, 0, 2, 3]);
+            
+            const colors = [
+                new THREE.Color('#FFB6C1'),
+                new THREE.Color('#FFC0CB'),
+                new THREE.Color('#FFE4E1'),
+                new THREE.Color('#FF69B4'),
+                new THREE.Color('#FFF0F5')
+            ];
+            const petalColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            const petalMaterial = new THREE.MeshBasicMaterial({
+                color: petalColor,
+                transparent: true,
+                opacity: 0.7,
+                side: THREE.DoubleSide,
+                blending: THREE.AdditiveBlending
+            });
+            
+            const petal = new THREE.Mesh(petalGeometry, petalMaterial);
+            
+            const radius = 80 + Math.random() * 180;
+            const theta = Math.random() * Math.PI * 2;
+            
+            petal.position.set(
+                Math.cos(theta) * radius,
+                150 + Math.random() * 100,
+                Math.sin(theta) * radius
+            );
+            
+            petal.rotation.set(
+                Math.random() * Math.PI,
+                Math.random() * Math.PI,
+                Math.random() * Math.PI
+            );
+            
+            petal.userData.rotationSpeed = {
+                x: (Math.random() - 0.5) * 0.03,
+                y: (Math.random() - 0.5) * 0.03,
+                z: (Math.random() - 0.5) * 0.03
+            };
+            petal.userData.fallSpeed = 0.15 + Math.random() * 0.25;
+            petal.userData.horizontalDrift = (Math.random() - 0.5) * 0.02;
+            petal.userData.initialHeight = petal.position.y;
+            
+            galaxyGroup.add(petal);
+            petals.push(petal);
+        }
+        
+        window.petals = petals;
+    }
+
+    function loadAssetsAndCreateElements() {
+        const textConfig = CONFIG.particles.texts;
+        const imageConfig = CONFIG.particles.images;
+        const textureLoader = new THREE.TextureLoader();
+        
+        let loadedCount = 0;
+        const totalAssets = textConfig.count + imageConfig.count;
+
+        for (let i = 0; i < textConfig.count; i++) {
+            const colorData = textConfig.colors[i % textConfig.colors.length];
+            const texture = createTextTexture(
+                textConfig.content[i % textConfig.content.length], 
+                colorData
+            );
+            
+            const material = new THREE.MeshPhongMaterial({
+                map: texture, 
+                transparent: true, 
+                alphaTest: 0.1,
+                color: '#ffffff', 
+                emissive: colorData.fill, 
+                emissiveIntensity: 1.2,
+                side: THREE.DoubleSide,
+                shininess: 20
+            });
+            
+            const textMesh = new THREE.Mesh(
+                new THREE.PlaneGeometry(textConfig.width, textConfig.height), 
+                material
+            );
+            
+            setElementOrbitPosition(textMesh, textConfig.minRadius, textConfig.maxRadius);
+            textMesh.userData.initialY = textMesh.position.y;
+            textMesh.userData.floatOffset = Math.random() * Math.PI * 2;
+            textMesh.userData.scaleOffset = Math.random() * Math.PI * 2;
+            
+            galaxyGroup.add(textMesh);
+            loveTexts.push(textMesh);
+            
+            loadedCount++;
+            updateLoadingBar(loadedCount / totalAssets);
+        }
+
+        for (let i = 0; i < imageConfig.count; i++) {
+            const imgIndex = i % imageData.length;
+            const img = imageData[imgIndex];
+            const url = img.url;
+            const message = img.message;
+            
+            const proxyUrl = 'https://dedicapag.com/es/PagFlorGalaxy/image_proxy.php?url=' + encodeURIComponent(url);
+            
+            textureLoader.load(
+                proxyUrl,
+                (texture) => {
+                    const aspect = texture.image.width / texture.image.height;
+                    const w = aspect > 1 ? imageConfig.size : imageConfig.size * aspect;
+                    const h = aspect > 1 ? imageConfig.size / aspect : imageConfig.size;
+                    const roundedTexture = createRoundedImageTexture(texture);
+
+                    const material = new THREE.MeshBasicMaterial({
+                        map: roundedTexture, 
+                        transparent: true, 
+                        alphaTest: 0.5,
+                        color: new THREE.Color(0.65, 0.65, 0.65),
+                        fog: false
+                    });
+                    
+                    material.needsUpdate = true;
+                    const imageMesh = new THREE.Mesh(new THREE.PlaneGeometry(w, h), material);
+                    
+                    imageMesh.userData.url = url;
+                    imageMesh.userData.message = message;
+                    
+                    setElementOrbitPosition(imageMesh, imageConfig.minRadius, imageConfig.maxRadius);
+                    imageMesh.userData.initialY = imageMesh.position.y;
+                    imageMesh.userData.floatOffset = Math.random() * Math.PI * 2;
+                    imageMesh.userData.rotationOffset = Math.random() * Math.PI * 2;
+                    imageMesh.userData.scaleOffset = Math.random() * Math.PI * 2;
+                    
+                    galaxyGroup.add(imageMesh);
+                    loveImages.push(imageMesh);
+                    
+                    loadedCount++;
+                    updateLoadingBar(loadedCount / totalAssets);
+                },
+                undefined,
+                (error) => {
+                    console.error('Error cargando imagen proxied:', proxyUrl, error);
+                    loadedCount++;
+                    updateLoadingBar(loadedCount / totalAssets);
+                }
+            );
+        }
+
+        setTimeout(createFloatingPetals, 1000);
+    }
+
+    function updateLoadingBar(progress) {
+        const loadingBar = document.getElementById('loading-bar');
+        if (loadingBar) {
+            loadingBar.style.width = (progress * 100) + '%';
+        }
+    }
+
+    function setElementOrbitPosition(element, minRadius, maxRadius) {
+        const safeMinRadius = minRadius || CONFIG.elementExclusionRadius;
+        const safeMaxRadius = maxRadius || CONFIG.particles.coreStars.radius;
+        
+        const minSeparation = 22;
+        const maxAttempts = 100;
+        
+        let validPosition = false;
+        let attempts = 0;
+        let finalPosition = { x: 0, y: 0, z: 0 };
+        
+        while (!validPosition && attempts < maxAttempts) {
+            attempts++;
+            
+            const radius = safeMinRadius + Math.random() * (safeMaxRadius - safeMinRadius);
+            const theta = Math.random() * Math.PI * 2;
+            const maxVerticalOffset = 20;
+            const y = (Math.random() - 0.5) * maxVerticalOffset;
+            
+            const x = radius * Math.cos(theta);
+            const z = radius * Math.sin(theta);
+            
+            validPosition = true;
+            for (let pos of occupiedPositions) {
+                const dx = x - pos.x;
+                const dy = y - pos.y;
+                const dz = z - pos.z;
+                const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
+                
+                if (distance < minSeparation) {
+                    validPosition = false;
+                    break;
+                }
+            }
+            
+            if (validPosition) {
+                finalPosition = { x, y, z };
+            }
+        }
+        
+        element.position.set(finalPosition.x, finalPosition.y, finalPosition.z);
+        occupiedPositions.push(finalPosition);
+    }
+
+    function createTextTexture(text, color) {
+        const canvas = document.createElement('canvas');
+        canvas.width = 1200;
+        canvas.height = 400;
+        const context = canvas.getContext('2d');
+        
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        
+        context.font = 'bold 110px "Caveat", cursive';
+        context.fillStyle = color.fill;
+        context.textAlign = 'center';
+        context.textBaseline = 'middle';
+        
+        const words = text.split(' ');
+        let lines = [];
+        let currentLine = words[0];
+        const maxWidth = canvas.width - 140;
+        const lineHeight = 145;
+
+        for (let i = 1; i < words.length; i++) {
+            const testLine = currentLine + ' ' + words[i];
+            if (context.measureText(testLine).width > maxWidth && currentLine.length > 0) {
+                lines.push(currentLine);
+                currentLine = words[i];
+            } else {
+                currentLine = testLine;
+            }
+        }
+        lines.push(currentLine);
+
+        const startY = canvas.height / 2 - (lines.length - 1) * lineHeight / 2;
+        lines.forEach((line, index) => {
+            const y = startY + index * lineHeight;
+            
+            context.shadowColor = color.shadow;
+            context.shadowBlur = 12;
+            context.fillText(line, canvas.width / 2, y);
+            
+            context.shadowBlur = 8;
+            context.fillText(line, canvas.width / 2, y);
+        });
+        
+        return new THREE.CanvasTexture(canvas);
+    }
+
+    function createRoundedImageTexture(texture) {
+        const img = texture.image;
+        const maxSize = 800;
+        const w = (img.width > img.height) ? maxSize : (img.width / img.height) * maxSize;
+        const h = (img.width > img.height) ? (img.height / img.width) * maxSize : maxSize;
+        
+        const canvas = document.createElement('canvas');
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext('2d');
+        
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        
+        const r = Math.min(w, h) * 0.15;
+        
+        ctx.clearRect(0, 0, w, h);
+        
+        ctx.beginPath();
+        ctx.moveTo(r, 0);
+        ctx.lineTo(w - r, 0);
+        ctx.quadraticCurveTo(w, 0, w, r);
+        ctx.lineTo(w, h - r);
+        ctx.quadraticCurveTo(w, h, w - r, h);
+        ctx.lineTo(r, h);
+        ctx.quadraticCurveTo(0, h, 0, h - r);
+        ctx.lineTo(0, r);
+        ctx.quadraticCurveTo(0, 0, r, 0);
+        ctx.closePath();
+        ctx.clip();
+        
+        ctx.drawImage(img, 0, 0, w, h);
+        
+        ctx.globalCompositeOperation = 'destination-over';
+        ctx.shadowColor = 'rgba(0, 191, 255, 0.6)';
+        ctx.shadowBlur = 25;
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+        ctx.fillRect(0, 0, w, h);
+        
+        const newTexture = new THREE.CanvasTexture(canvas);
+        newTexture.colorSpace = THREE.SRGBColorSpace;
+        newTexture.generateMipmaps = true;
+        newTexture.minFilter = THREE.LinearMipmapLinearFilter;
+        newTexture.magFilter = THREE.LinearFilter;
+        
+        return newTexture;
+    }
+
+    function onWindowResize() {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        
+        renderer.setSize(width, height);
+        composer.setSize(width, height);
+        camera.aspect = width / height;
+        
+        const currentIsMobile = width < 768;
+        if (currentIsMobile !== isMobile) {
+            location.reload();
+        }
+        
+        camera.position.set(0, 45, currentIsMobile ? 200 : 150);
+        camera.updateProjectionMatrix();
+        
+        starParticles.forEach(({ material }) => {
+            material.uniforms.uPixelRatio.value = Math.min(window.devicePixelRatio, 2);
+        });
+        
+        if (bgStars) {
+            bgStars.material.uniforms.uPixelRatio.value = Math.min(window.devicePixelRatio, 2);
+        }
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+        const elapsedTime = clock.getElapsedTime();
+        
+        galaxyGroup.rotation.y = elapsedTime * CONFIG.galaxy.rotationSpeed;
+        
+        // Hacer que el grupo central (flor + anillo) siempre mire a la cámara (billboard effect)
+        if (window.centerGroup) {
+            window.centerGroup.lookAt(camera.position);
+            
+            // Efecto de respiración sutil aplicado a todo el grupo
+            const breathe = Math.sin(elapsedTime * 0.8) * 0.05 + 1;
+            window.centerGroup.scale.setScalar(breathe);
+        }
+        
+        // Actualizar el tiempo del shader del anillo
+        if (accretionRing) {
+            accretionRing.material.uniforms.uTime.value = elapsedTime;
+        }
+        
+        starParticles.forEach(({ material }) => {
+            material.uniforms.uTime.value = elapsedTime;
+        });
+        
+        if (bgStars) {
+            bgStars.material.uniforms.uTime.value = elapsedTime;
+            bgStars.rotation.y = elapsedTime * 0.015;
+        }
+        
+        const textConfig = CONFIG.particles.texts;
+        loveTexts.forEach((text) => {
+            text.lookAt(camera.position);
+            
+            const floatY = Math.sin(elapsedTime * textConfig.floatSpeed + text.userData.floatOffset) * textConfig.floatAmplitude;
+            text.position.y = text.userData.initialY + floatY;
+            
+            const distance = text.position.distanceTo(camera.position);
+            const minDist = 50;
+            const maxDist = 220;
+            const baseScale = THREE.MathUtils.clamp(1 - (distance - minDist) / (maxDist - minDist), 0.6, 1);
+            const breathe = Math.sin(elapsedTime * 0.8 + text.userData.scaleOffset) * 0.08 + 1;
+            text.scale.setScalar(baseScale * breathe);
+        });
+        
+        loveImages.forEach((img) => {
+            img.lookAt(camera.position);
+            
+            const floatY = Math.sin(elapsedTime * 0.65 + img.userData.floatOffset) * 0.7;
+            img.position.y = img.userData.initialY + floatY;
+            
+            const subtleRotation = Math.sin(elapsedTime * 0.35 + img.userData.rotationOffset) * 0.06;
+            img.rotation.z = subtleRotation;
+            
+            const distance = img.position.distanceTo(camera.position);
+            const minDist = 50;
+            const maxDist = 220;
+            const baseScale = THREE.MathUtils.clamp(1 - (distance - minDist) / (maxDist - minDist), 0.7, 1);
+            const pulse = Math.sin(elapsedTime * 1.2 + img.userData.scaleOffset) * 0.06 + 1;
+            img.scale.setScalar(baseScale * pulse);
+        });
+        
+        if (window.petals) {
+            window.petals.forEach((petal) => {
+                petal.rotation.x += petal.userData.rotationSpeed.x;
+                petal.rotation.y += petal.userData.rotationSpeed.y;
+                petal.rotation.z += petal.userData.rotationSpeed.z;
+                
+                petal.position.y -= petal.userData.fallSpeed;
+                petal.position.x += Math.sin(elapsedTime + petal.userData.initialHeight) * petal.userData.horizontalDrift;
+                petal.position.z += Math.cos(elapsedTime + petal.userData.initialHeight) * petal.userData.horizontalDrift;
+                
+                if (petal.position.y < -80) {
+                    petal.position.y = 150 + Math.random() * 100;
+                    const radius = 80 + Math.random() * 180;
+                    const theta = Math.random() * Math.PI * 2;
+                    petal.position.x = Math.cos(theta) * radius;
+                    petal.position.z = Math.sin(theta) * radius;
+                }
+            });
+        }
+        
+        controls.update();
+        composer.render();
+    }
+
+    init();
+
+    let started = false;
+
+    document.getElementById('start-button-image').addEventListener('click', startExperience);
+    document.getElementById('start-text').addEventListener('click', startExperience);
+    document.getElementById('subtitle-text').addEventListener('click', startExperience);
+
+    function startExperience() {
+        if (started) return;
+        started = true;
+
+        const startScreen = document.getElementById('start-screen');
+        const music = document.getElementById('background-music');
+        
+        if (music) {
+            music.volume = 0.6;
+            music.play().catch(e => console.warn("No se pudo reproducir música", e));
+        }
+
+        if (startScreen) {
+            startScreen.style.transition = 'opacity 1.2s ease-out';
+            startScreen.style.opacity = '0';
+            startScreen.style.pointerEvents = 'none';
+        }
+
+        setTimeout(() => {
+            try {
+                startCameraAnimation();
+            } catch (err) {
+                console.error("Error en startCameraAnimation:", err);
+            }
+            if (startScreen) {
+                setTimeout(() => {
+                    startScreen.style.display = 'none';
+                }, 600);
+            }
+        }, 200);
+
+        setTimeout(() => {
+            const controlsInfo = document.getElementById('controls-info');
+            if (controlsInfo) {
+                setTimeout(() => {
+                    controlsInfo.style.opacity = '0';
+                    controlsInfo.style.transition = 'opacity 1.5s ease-out';
+                    setTimeout(() => controlsInfo.remove(), 1500);
+                }, 10000);
+            }
+        }, 100);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const fullscreenBtn = document.getElementById('fullscreen-btn');
+        const element = document.documentElement;
+
+        fullscreenBtn.addEventListener('click', toggleFullscreen);
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                if (element.requestFullscreen) {
+                    element.requestFullscreen();
+                } else if (element.webkitRequestFullscreen) {
+                    element.webkitRequestFullscreen();
+                } else if (element.msRequestFullscreen) {
+                    element.msRequestFullscreen();
+                }
+                fullscreenBtn.classList.add('fullscreen-active');
+                fullscreenBtn.textContent = '⟢';
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+                fullscreenBtn.classList.remove('fullscreen-active');
+                fullscreenBtn.textContent = '⛶';
+            }
+        }
+
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement) {
+                fullscreenBtn.classList.remove('fullscreen-active');
+                fullscreenBtn.textContent = '⛶';
+            }
+        });
+    });
+
+    function startCameraAnimation() {
+        if (startCameraAnimation.running) return;
+        if (typeof camera === 'undefined' || typeof controls === 'undefined') {
+            console.error("startCameraAnimation: falta camera o controls");
+            return;
+        }
+
+        startCameraAnimation.running = true;
+        controls.enabled = false;
+
+        const targetVec = new THREE.Vector3(0, 0, 0);
+        const startPos = { x: targetVec.x, y: targetVec.y + 120, z: targetVec.z + 70 };
+        const downPos  = { x: targetVec.x, y: targetVec.y + 20,   z: targetVec.z + 70 };
+        const backPos  = { x: targetVec.x + 120, y: targetVec.y + 10, z: targetVec.z + 220 };
+        const endPos   = { x: targetVec.x - 40,  y: targetVec.y + 120, z: targetVec.z + 190 };
+
+        const d1 = 3500;
+        const d2 = 8000;
+        const d3 = 500;
+        const t0 = performance.now();
+
+        const easeInOutCubic = t => t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3)/2;
+        const lerp = (a,b,t) => a + (b-a)*t;
+        const lerpV = (A,B,t) => ({ x: lerp(A.x,B.x,t), y: lerp(A.y,B.y,t), z: lerp(A.z,B.z,t) });
+
+        camera.position.set(startPos.x, startPos.y, startPos.z);
+        camera.lookAt(targetVec);
+        controls.target.copy(targetVec);
+        controls.update();
+
+        function step(now) {
+            const elapsed = now - t0;
+            let newPos;
+
+            if (elapsed < d1) {
+                const tn = Math.max(0, Math.min(1, elapsed / d1));
+                const e = easeInOutCubic(tn);
+                newPos = lerpV(startPos, downPos, e);
+            } else if (elapsed < d1 + d2) {
+                const tn = Math.max(0, Math.min(1, (elapsed - d1) / d2));
+                const e = easeInOutCubic(tn);
+                const base = lerpV(downPos, backPos, e);
+                const swing = Math.sin(tn * Math.PI * 2) * (1 - tn) * 6;
+                const bob = Math.sin(tn * Math.PI) * 2.5;
+                newPos = { x: base.x + swing, y: base.y + bob, z: base.z };
+            } else if (elapsed < d1 + d2 + d3) {
+                const tn = Math.max(0, Math.min(1, (elapsed - d1 - d2) / d3));
+                const e = easeInOutCubic(tn);
+                newPos = lerpV(backPos, endPos, e);
+            } else {
+                camera.position.set(endPos.x, endPos.y, endPos.z);
+                camera.lookAt(targetVec);
+                controls.target.copy(targetVec);
+                controls.update();
+                controls.enabled = true;
+                startCameraAnimation.running = false;
+                return;
+            }
+
+            camera.position.set(newPos.x, newPos.y, newPos.z);
+            camera.lookAt(targetVec);
+            controls.target.copy(targetVec);
+            controls.update();
+
+            requestAnimationFrame(step);
+        }
+
+        requestAnimationFrame(step);
+    }
+
+    const startBtn = document.getElementById('start-button-image');
+    const startText = document.getElementById('start-text');
+    const subtitle = document.getElementById('subtitle-text');
+    const startScreen = document.getElementById('start-screen');
+
+    if (startBtn) startBtn.addEventListener('click', startExperience);
+    if (startText) startText.addEventListener('click', startExperience);
+    if (subtitle) subtitle.addEventListener('click', startExperience);
+
+    if (startScreen) startScreen.addEventListener('click', (e) => {
+        if (e.target === startScreen) startExperience();
+    });
+    </script>
+</body>
+
+<!-- Mirrored from dedicapag.com/u/690f7fd3bd531 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Nov 2025 18:24:28 GMT -->
+</html>
